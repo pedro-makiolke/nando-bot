@@ -1,5 +1,5 @@
-const {GuildMember} = require('discord.js');
-const {QueryType} = require('discord-player');
+const { GuildMember } = require('discord.js');
+const { QueryType } = require('discord-player');
 
 module.exports = {
   name: 'tocar',
@@ -8,16 +8,16 @@ module.exports = {
   options: [
     {
       name: 'query',
-      type: 3, 
+      type: 3,
       description: 'O nome da musica fi',
       required: true,
     },
   ],
-  run: async (player, interaction) =>{
+  run: async (player, interaction) => {
     try {
       if (!(interaction.member instanceof GuildMember) || !interaction.member.voice.channel) {
         return void interaction.reply({
-          content: 'ENTRA NUM CANAL DE VOZ DJABO',
+          content: 'ENTRA NUM CANAL DE VOZ BURRO',
           ephemeral: true,
         });
       }
@@ -40,19 +40,19 @@ module.exports = {
           requestedBy: interaction.user,
           searchEngine: QueryType.AUTO,
         })
-        .catch(() => {});
+        .catch(() => { });
       if (!searchResult || !searchResult.tracks.length)
         return void interaction.followUp({
-            content: 'ALA SABE NEM PESQUISAKKKKKKKKKK'
+          content: 'ALA SABE NEM PESQUISAKKKKKKKKKK'
         });
 
       const queue = await player.createQueue(interaction.guild, {
         ytdlOptions: {
-				quality: "highest",
-				filter: "audioonly",
-				highWaterMark: 1 << 25,
-				dlChunkSize: 0,
-			},
+          quality: "highest",
+          filter: "audioonly",
+          highWaterMark: 1 << 25,
+          dlChunkSize: 0,
+        },
         metadata: interaction.channel,
       });
 
