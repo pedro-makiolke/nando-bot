@@ -1,14 +1,14 @@
 FROM node:17.4.0
 
-WORKDIR /usr/src/app
+WORKDIR /usr/src/
 
 RUN apt-get update || : && apt-get install python -y
 RUN apt-get install ffmpeg -y
 
 COPY package*.json ./
 
-RUN npm ci
+COPY src/ /usr/src/
 
-COPY . .
+RUN npm install
 
-CMD [ "cd","src", "node", "bot.js" ]
+ENTRYPOINT ["node", "bot.js"]
